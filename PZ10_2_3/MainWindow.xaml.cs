@@ -14,30 +14,39 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
+using System.Drawing;
 
 namespace PZ10_2_3
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
+            List<Color> aallColors = new List<Color>();
+
+            foreach (PropertyInfo property in typeof(Color).GetProperties())
+            {
+                if (property.PropertyType == typeof(Color))
+                {
+                    aallColors.Add((Color)property.GetValue(null));
+                }
+            }
+
             InitializeComponent();
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             cmbFontSize.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            cmbFontColor.ItemsSource = aallColors;
         }
         private void cmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbFontFamily.SelectedItem != null)
                 rtbEditor.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, cmbFontFamily.SelectedItem);
         }
-
-        private void cmbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        private void cmbFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             rtbEditor.Selection.ApplyPropertyValue(Inline.FontSizeProperty, cmbFontSize.Text);
         }
+
 
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -75,6 +84,11 @@ namespace PZ10_2_3
                 TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
                 range.Save(fileStream, DataFormats.Rtf);
             }
+        }
+
+        private void cmbFontColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

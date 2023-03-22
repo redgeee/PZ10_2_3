@@ -10,36 +10,49 @@
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
     </Window.CommandBindings>
-    <Grid>
-        <StackPanel>
 
-            <ToolBar Height="31">
-
-                <Button Content="O" Command="ApplicationCommands.Open"/>
-                <Button Content="S" Command="ApplicationCommands.Save"/>
-                <Separator/>
-                <ToggleButton Content="B" Command="EditingCommands.ToggleBold" Name="btnBold">
-                    
-                </ToggleButton>
-                <ToggleButton Content="I" Command="EditingCommands.ToggleItalic" Name="btnItalic">
-                    
-                </ToggleButton>
-                <ToggleButton Content="U" Command="EditingCommands.ToggleUnderline" Name="btnUnderline">
-                    
-                </ToggleButton>
-                <Separator/>
-                <ComboBox Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged" />
-                <ComboBox Name="cmbFontSize" Width="50" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged" />
-                <Border BorderBrush="Black" BorderThickness="1"/>
-            </ToolBar>
-
-            <RichTextBox x:Name="rtbEditor" Height="187" SelectionChanged="rtbEditor_SelectionChanged">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text="RichTextBox"/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-        </StackPanel>
-    </Grid>
+    <StackPanel>
+        <ToolBar Height="42">
+            <Button Content="O" Command="ApplicationCommands.Open"/>
+            <Button Command="ApplicationCommands.Save">
+                <Image Height="30" Source="/free-icon-font-disk-3917394.png" Stretch="Fill" Width="30" RenderTransformOrigin="0.5,0.5"/>
+            </Button>
+            <Separator/>
+            <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold">
+                <Image Height="30" Source="/free-icon-font-bold-3917152.png" Stretch="Fill" Width="30"/>
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic">
+                <Image Height="30" Source="/free-icon-font-italic-3917170.png" Stretch="Fill" Width="30"/>
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline">
+                <Image Height="30" Source="/free-icon-font-underline-3917185.png" Stretch="Fill" Width="30"/>
+            </ToggleButton>
+            <Separator/>
+            <ComboBox Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged" />
+            <ComboBox Name="cmbFontSize" Width="50" IsEditable="True" SelectionChanged="cmbFontSize_SelectionChanged" />
+            <ComboBox Name="cmbFontColor" Width="100" SelectionChanged="cmbFontColor_SelectionChanged" />
+            <!--<ComboBox Width="100" ItemsSource="{Binding ColorList}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:ColorsServices}">
+                        <DockPanel LastChildFill="True">
+                            <Ellipse Height="15" Width="15" VerticalAlignment="Center"
+                         DockPanel.Dock="Left">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{Binding Name}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="2"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>-->
+        </ToolBar>
+        <RichTextBox x:Name="rtbEditor" Height="391" SelectionChanged="rtbEditor_SelectionChanged">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </StackPanel>
 </Window>
